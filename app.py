@@ -20,6 +20,6 @@ excel_path = 'aggregated_data.xlsx'
 aggregated_df.to_excel(excel_path, index=False)
 
 # Display the DataFrame to the user
-import ace_tools as tools; tools.display_dataframe_to_user(name="Aggregated Data", dataframe=aggregated_df)
+# import ace_tools as tools; tools.display_dataframe_to_user(name="Aggregated Data", dataframe=aggregated_df)
 
-print(f"Aggregated data has been saved to {excel_path}")
+# print(f"Aggregated data has been saved to {excel_path}")
