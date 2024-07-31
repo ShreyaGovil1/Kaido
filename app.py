@@ -1,5 +1,7 @@
 import pandas as pd
 import json
+from spire.xls import *
+from spire.xls.common import *
 
 # Load the JSON data
 with open('data.json') as file:
@@ -19,15 +21,22 @@ capital_gain = df['totalAmount'].sum()
 new_row = {'totalAmount':capital_gain}
 aggregated_df = aggregated_df.append(new_row, ignore_index=True)
 
-
-
 # Save the aggregated DataFrame to an Excel file
 excel_path = 'aggregated_data.xlsx'
 aggregated_df.to_excel(excel_path, index=False)
 
 
+pdf_path='output.pdf'
 
-# Display the DataFrame to the user
-# import ace_tools as tools; tools.display_dataframe_to_user(name="Aggregated Data", dataframe=aggregated_df)
 
-# print(f"Aggregated data has been saved to {excel_path}")
+
+#Create a workbook
+workbook = Workbook()
+#Load an Excel XLS or XLSX file
+workbook.LoadFromFile(excel_path)
+
+#Fit each worksheet to one page
+workbook.ConverterSetting.SheetFitToPage = True
+#convert the Excel file to PDF format
+workbook.SaveToFile(pdf_path, FileFormat.PDF)
+workbook.Dispose()
