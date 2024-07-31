@@ -11,13 +11,21 @@ df = pd.DataFrame(data)
 # Aggregate the data based on assetName
 aggregated_df = df.groupby('assetName').agg({
     'quantity': 'sum',
-    'lastPurchasePrice': 'mean',
+    'lastPurchasePrice': 'sum',
     'totalAmount': 'sum'
 }).reset_index()
+
+capital_gain = df['totalAmount'].sum()
+new_row = {'totalAmount':capital_gain}
+aggregated_df = aggregated_df.append(new_row, ignore_index=True)
+
+
 
 # Save the aggregated DataFrame to an Excel file
 excel_path = 'aggregated_data.xlsx'
 aggregated_df.to_excel(excel_path, index=False)
+
+
 
 # Display the DataFrame to the user
 # import ace_tools as tools; tools.display_dataframe_to_user(name="Aggregated Data", dataframe=aggregated_df)
