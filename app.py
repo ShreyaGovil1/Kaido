@@ -32,52 +32,52 @@ with pd.ExcelWriter(excel_path) as writer:
     summary_df.to_excel(writer, sheet_name='Summary', index=False)
 
 # -------------------------------------------------------
-# # Convert the Excel to PDF by first displaying it as a table in Matplotlib
-# pdf_path = 'output.pdf'
+# Convert the Excel to PDF by first displaying it as a table in Matplotlib
+pdf_path = 'output.pdf'
 
-# # Create a figure and axis to plot the DataFrame
-# fig, ax = plt.subplots(figsize=(8, 4))
+# Create a figure and axis to plot the DataFrame
+fig, ax = plt.subplots(figsize=(8, 4))
 
-# # Hide the axes
-# ax.xaxis.set_visible(False)
-# ax.yaxis.set_visible(False)
-# ax.set_frame_on(False)
+# Hide the axes
+ax.xaxis.set_visible(False)
+ax.yaxis.set_visible(False)
+ax.set_frame_on(False)
 
-# # Add the table and set its size
-# table = ax.table(cellText=aggregated_df.values, colLabels=aggregated_df.columns, cellLoc='center', loc='center')
+# Add the table and set its size
+table = ax.table(cellText=aggregated_df.values, colLabels=aggregated_df.columns, cellLoc='center', loc='center')
 
-# # Adjust the font size and scale of the table to fit within the figure
-# table.auto_set_font_size(False)
-# table.set_fontsize(10)
-# table.scale(1.2, 1.2)
+# Adjust the font size and scale of the table to fit within the figure
+table.auto_set_font_size(False)
+table.set_fontsize(10)
+table.scale(1.2, 1.2)
 
-# # Save the figure as a PDF
-# plt.savefig(pdf_path, format='pdf')
+# Save the figure as a PDF
+plt.savefig(pdf_path, format='pdf')
 
 # -------------------------------------------------------
 
-# Convert Excel to JSON
-def excel_to_json(excel_path):
-    # Read the Excel file
-    df = pd.read_excel(excel_path, sheet_name='Aggregated Data')
+# # Convert Excel to JSON
+# def excel_to_json(excel_path):
+#     # Read the Excel file
+#     df = pd.read_excel(excel_path, sheet_name='Aggregated Data')
 
-    # Convert DataFrame to JSON
-    json_data = df.to_json(orient='records')
+#     # Convert DataFrame to JSON
+#     json_data = df.to_json(orient='records')
     
-    return json_data
+#     return json_data
 
-# Define the path to your Excel file
-excel_path = 'aggregated_data.xlsx'
+# # Define the path to your Excel file
+# excel_path = 'aggregated_data.xlsx'
 
-# Convert the Excel file to JSON
-json_data = excel_to_json(excel_path)
+# # Convert the Excel file to JSON
+# json_data = excel_to_json(excel_path)
 
-# Create a Flask API
-app = Flask(__name__)
+# # Create a Flask API
+# app = Flask(__name__)
 
-@app.route('/get_data', methods=['GET'])
-def get_data():
-    return jsonify(json_data)
+# @app.route('/get_data', methods=['GET'])
+# def get_data():
+#     return jsonify(json_data)
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+# if __name__ == '__main__':
+#     app.run(debug=True, host='0.0.0.0', port=5000)
